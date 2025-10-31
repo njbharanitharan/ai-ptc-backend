@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI PTC Backend Test</title>
+</head>
+<body>
+  <h2>Create New Item</h2>
+  <input id="name" placeholder="Name"><br><br>
+  <input id="description" placeholder="Description"><br><br>
+  <input id="imageInput" type="file"><br><br>
+  <button onclick="createItem()">Create</button>
+
+  <h2>All Items</h2>
+  <div id="itemsContainer"></div>
+
+  <script>
+    async function createItem() {
+      const name = document.getElementById('name').value;
+      const desc = document.getElementById('description').value;
+      const fileInput = document.getElementById('imageInput');
+      const fd = new FormData();
+      fd.append('name', name);
+      fd.append('description', desc);
+      if (fileInput.files[0]) fd.append('image', fileInput.files[0]);
+
+      const res = await fetch('http://localhost:8080/api/items', { method: 'POST', body: fd });
+      if (!res.ok) {
+        alert('Failed to create: ' + res.status);
+        return;
+      }
+      alert('✅ Item created successfully!');
+      loadItems();
+    }
+
+    async function loadItems() {
+      const res = await fetch('http://localhost:8080/api/items');
+      const items = await res.json();
+      const c = document.getElementById('itemsContainer');
+      c.innerHTML = '';
+      items.forEach(it => {
+        c.insertAdjacentHTML('beforeend', `
+          <div style="border:1px solid #ccc; padding:10px; margin:10px;">
+            <h4>${escapeHtml(it.name)}</h4>
+            <p>${escapeHtml(it.description)}</p>
+            ${it.imageFilename ? `<img src="http://localhost:8080/api/items/image/${it.imageFilename}" style="max-width:200px;">` : ''}
+            <br><button onclick="deleteItem(${it.id})">🗑 Delete</button>
+          </div>
+        `);
+      });
+    }
+
+    async function deleteItem(id) {
+      await fetch('http://localhost:8080/api/items/' + id, { method: 'DELETE' });
+      loadItems();
+    }
+
+    function escapeHtml(s) {
+      return s ? s.replace(/[&<>"']/g, c => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+      }[c])) : '';
+    }
+
+    // Load all items on page load
+    loadItems();
+  </script>
+</body>
+</html>
