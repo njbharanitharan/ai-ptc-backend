@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PTC Database Management - Admin Panel</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Header -->
+        <header class="admin-header">
+            <div class="header-content">
+                <h1>🔧 Database Management</h1>
+                <p>Manage plant protocols, images, and references</p>
+            </div>
+            <a href="index.html" class="back-btn">← Back to Chatbot</a>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <nav class="admin-nav">
+            <button class="nav-btn active" data-tab="protocols-tab">📋 Protocols</button>
+            <button class="nav-btn" data-tab="images-tab">🖼️ Images</button>
+            <button class="nav-btn" data-tab="references-tab">📚 References</button>
+            <button class="nav-btn" data-tab="contamination-tab">🧪 Anti-Contamination</button>
+            <button class="nav-btn" data-tab="data-tab">💾 Data Export/Import</button>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="admin-content">
+            <!-- Protocols Tab -->
+            <div id="protocols-tab" class="tab-content active">
+                <h2>Manage Plant Protocols</h2>
+                
+                <div class="form-section">
+                    <h3>Add New Protocol</h3>
+                    <form id="protocolForm">
+                        <div class="form-group">
+                            <label for="plantName">Plant Name:</label>
+                            <input type="text" id="plantName" placeholder="e.g., Tomato" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="protocolSteps">Protocol Steps (one per line):</label>
+                            <textarea id="protocolSteps" placeholder="Step 1&#10;Step 2&#10;Step 3..." rows="8" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">✅ Add Protocol</button>
+                    </form>
+                </div>
+
+                <div class="list-section">
+                    <h3>Existing Protocols</h3>
+                    <div id="protocolsList" class="items-list"></div>
+                </div>
+            </div>
+
+            <!-- Images Tab -->
+            <div id="images-tab" class="tab-content">
+                <h2>Manage Images</h2>
+                
+                <div class="form-section">
+                    <h3>Add Image to Plant</h3>
+                    <form id="imageForm">
+                        <div class="form-group">
+                            <label for="imageePlantName">Plant Name:</label>
+                            <input type="text" id="imageePlantName" placeholder="e.g., Tomato" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="imageUrl">Image URL:</label>
+                            <input type="url" id="imageUrl" placeholder="https://example.com/image.jpg" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="imageCaption">Image Caption:</label>
+                            <input type="text" id="imageCaption" placeholder="e.g., Tissue Culture Callus" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">📤 Add Image</button>
+                    </form>
+                </div>
+
+                <div class="list-section">
+                    <h3>Plant Images</h3>
+                    <div id="imagesList" class="items-list"></div>
+                </div>
+            </div>
+
+            <!-- References Tab -->
+            <div id="references-tab" class="tab-content">
+                <h2>Manage Research References</h2>
+                
+                <div class="form-section">
+                    <h3>Add Reference to Plant</h3>
+                    <form id="referenceForm">
+                        <div class="form-group">
+                            <label for="refPlantName">Plant Name:</label>
+                            <input type="text" id="refPlantName" placeholder="e.g., Tomato" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="referenceText">Reference (Citation):</label>
+                            <textarea id="referenceText" placeholder="Author(s). (Year). Title. Journal, Volume(Issue), Pages." rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">📝 Add Reference</button>
+                    </form>
+                </div>
+
+                <div class="list-section">
+                    <h3>Plant References</h3>
+                    <div id="referencesList" class="items-list"></div>
+                </div>
+            </div>
+
+            <!-- Contamination Protocol Tab -->
+            <div id="contamination-tab" class="tab-content">
+                <h2>Manage Anti-Contamination Protocols</h2>
+                
+                <div class="form-section">
+                    <h3>Add Anti-Contamination Protocol</h3>
+                    <form id="contaminationForm">
+                        <div class="form-group">
+                            <label for="contPlantName">Plant Name:</label>
+                            <input type="text" id="contPlantName" placeholder="e.g., Tomato" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="revisedSteps">Revised Steps (one per line):</label>
+                            <textarea id="revisedSteps" placeholder="Step 1&#10;Step 2&#10;Step 3..." rows="8" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="contaminationTips">Tips:</label>
+                            <textarea id="contaminationTips" placeholder="Add helpful tips for preventing contamination..." rows="3" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">✅ Add Anti-Contamination Protocol</button>
+                    </form>
+                </div>
+
+                <div class="list-section">
+                    <h3>Existing Anti-Contamination Protocols</h3>
+                    <div id="contaminationList" class="items-list"></div>
+                </div>
+            </div>
+
+            <!-- Data Tab -->
+            <div id="data-tab" class="tab-content">
+                <h2>Data Export & Import</h2>
+                
+                <div class="form-section">
+                    <h3>Export Database</h3>
+                    <p>Download your entire database as a JSON file for backup or sharing.</p>
+                    <button id="exportBtn" class="btn btn-primary">📥 Export Database</button>
+                    <div id="exportStatus" style="margin-top: 10px;"></div>
+                </div>
+
+                <div class="form-section">
+                    <h3>Import Database</h3>
+                    <p>Upload a previously exported JSON file to restore or merge data.</p>
+                    <div class="file-upload">
+                        <input type="file" id="importFile" accept=".json" />
+                        <button id="importBtn" class="btn btn-primary">📤 Import Database</button>
+                    </div>
+                    <div id="importStatus" style="margin-top: 10px;"></div>
+                </div>
+
+                <div class="form-section">
+                    <h3>Reset Database</h3>
+                    <p style="color: #ef4444;">⚠️ This will delete all your data and restore the default mock data.</p>
+                    <button id="resetBtn" class="btn btn-danger">🔄 Reset to Default</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Status Messages -->
+        <div id="statusMessage" class="status-message"></div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

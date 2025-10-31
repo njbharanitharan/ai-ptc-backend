@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Tissue Culture Chatbot</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>🌿 Plant Tissue Culture Assistant</h1>
+                <p>Your AI-powered guide to tissue culture protocols</p>
+            </div>
+            <a href="admin.html" class="admin-btn">⚙️ Admin Panel</a>
+        </header>
+
+        <!-- Chat Container -->
+        <div class="chat-container">
+            <!-- Messages Area -->
+            <div class="messages-area" id="messagesArea">
+                <div class="message assistant-message">
+                    <div class="message-avatar">🤖</div>
+                    <div class="message-content">
+                        <p>Welcome to the Plant Tissue Culture Assistant! 🌱</p>
+                        <p>I can help you generate customized tissue culture protocols for any plant. Simply enter the plant name, and I'll provide you with:</p>
+                        <ul>
+                            <li>Step-by-step protocol</li>
+                            <li>Research article references</li>
+                            <li>Related images</li>
+                        </ul>
+                        <p>Let's get started! What plant would you like to work with?</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="input-area">
+                <form id="chatForm" class="chat-form">
+                    <div class="input-wrapper">
+                        <input 
+                            type="text" 
+                            id="userInput" 
+                            placeholder="Enter plant name (e.g., Tomato, Rose, Orchid)..."
+                            class="chat-input"
+                            autocomplete="off"
+                        >
+                        <button type="submit" class="send-btn">
+                            <span>Send</span>
+                            <span class="arrow">→</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for showing full protocol -->
+    <div id="protocolModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
