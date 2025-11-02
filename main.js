@@ -1,6 +1,50 @@
 // Initialize data with mock protocols
 const mockData = {
     protocols: {
+        // Mock data for initialization
+const mockData = {
+  protocols: {
+    aloeVera: {
+      name: "Aloe Vera",
+      protocol: [
+        "Select healthy, mature Aloe vera leaves or shoot tips as explants",
+        "Wash thoroughly under running tap water for 20 minutes",
+        "Add 2–3 drops of Tween-20 and soak explants for 20 minutes",
+        "Rinse with sterile distilled water (3–4 times)",
+        "Immerse in 70% ethanol for 30 seconds",
+        "Treat with 0.1% HgCl2 solution for 5–10 minutes",
+        "Rinse 3–5 times with sterile distilled water",
+        "Place explants on MS medium supplemented with 2 mg/L BAP and 0.5 mg/L NAA",
+        "Maintain cultures at 25°C with 16 hours photoperiod",
+        "Transfer regenerated shoots to MS medium with 0.5 mg/L IBA for rooting",
+        "Harden plantlets in cocopeat and soil mixture for 2–3 weeks before field transfer"
+      ],
+      references: [
+        "Murashige, T. & Skoog, F. (1962)...",
+        "Roy, S.C. & Sarkar, A. (1991)...",
+        "Hashem, A., et al. (2019)..."
+      ],
+      images: [
+        { url: "https://via.placeholder.com/200/32CD32/FFFFFF?text=Aloe+Vera", caption: "Aloe Vera Plant" },
+        { url: "https://via.placeholder.com/200/90EE90/FFFFFF?text=Shoot+Culture", caption: "Shoot Multiplication" },
+        { url: "https://via.placeholder.com/200/00FA9A/FFFFFF?text=Rooting", caption: "Root Induction" }
+      ]
+    }
+  },
+  contaminationProtocols: {
+    aloeVera: {
+      revisedSteps: [
+        "Replace HgCl2 with 2% sodium hypochlorite...",
+        "Increase exposure time to 20 minutes...",
+        "Use 100 mg/L streptomycin...",
+        "Add 0.1% bavistin...",
+        "Work strictly in laminar flow..."
+      ],
+      tips: "Avoid prolonged exposure to HgCl2..."
+    }
+  }
+};
+
         tomato: {
             name: "Tomato",
             protocol: [
@@ -439,4 +483,5 @@ window.addEventListener('click', (e) => {
 
 // Initialize
 initializeStorage();
+
 userInput.focus();
